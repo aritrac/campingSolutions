@@ -16,7 +16,8 @@ var commentRoutes       = require("./routes/comments");
 var campgroundRoutes    = require("./routes/campgrounds");
 var indexRoutes          = require("./routes/index");
 
-mongoose.connect("mongodb://localhost/yelp_camp_dynamic_price");
+//mongoose.connect("mongodb://localhost/yelp_camp_dynamic_price");
+mongoose.connect("mongodb://curly_braces:arit12345@ds247058.mlab.com:47058/ecommerce");
 app.use(bodyParser.urlencoded({extended : true}));
 app.set("view engine","ejs");
 app.use(express.static(__dirname + "/public"));
