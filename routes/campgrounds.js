@@ -51,7 +51,12 @@ router.get("/", function(req, res){
 router.post("/", middleware.isLoggedIn, function(req, res){
   // get data from form and add to campgrounds array
   var name = req.body.name;
-  var image = req.body.image;
+  var image;
+  if(req.body.image){
+    image = req.body.image;
+  }else{
+      image = "https://pikwizard.com/photos/2b2d64178b25d791bb613fbfa590ffcb-s.jpg";
+  }
   var desc = req.body.description;
   var price = req.body.price;
   var author = {
@@ -123,7 +128,13 @@ router.put("/:id", middleware.checkCampGroundOwnership, function(req, res){
     var lat = data[0].latitude;
     var lng = data[0].longitude;
     var location = data[0].formattedAddress;
-    var newData = {name: req.body.campground.name, image: req.body.campground.image, description: req.body.campground.description, location: location, lat: lat, lng: lng};
+    var img;
+    if(req.body.campground.image){
+        img = req.body.campground.image;
+    }else{
+        img = "https://pikwizard.com/photos/2b2d64178b25d791bb613fbfa590ffcb-s.jpg";
+    }
+    var newData = {name: req.body.campground.name, image: img, description: req.body.campground.description, location: location, lat: lat, lng: lng};
     Campground.findByIdAndUpdate(req.params.id, newData, function(err, campground){
         if(err){
             console.log(err);
